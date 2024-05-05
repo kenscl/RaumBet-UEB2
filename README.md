@@ -1,2 +1,8 @@
-# RaumBet-UEB2
-# RaumBet-Ueb2
+# Raumfahrtbetrieb Übung 2
+# Compiling
+```
+mkdir build 
+cd build
+cmake ..
+make
+```
