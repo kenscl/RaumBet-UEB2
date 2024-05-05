@@ -12,4 +12,3 @@ file(GLOB_RECURSE SOURCES
 
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-
