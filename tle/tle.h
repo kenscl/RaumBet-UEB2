@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <cmath>
-#include "..\helper\mathhelper.h"
+#include "../helper/mathhelper.h"
 
 class TLE
 {
