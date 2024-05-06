@@ -29,17 +29,21 @@ int main(int argc, char *argv[])
     propagator.setTle(test_case_tle);
     for (int i = 0; i <= 1440 * 60; i += 360 * 60) {
         propagator.calculatePositionAndVelocity(i, POS, VEL);
+        printf("Time after Epoch %d \n", i / 60);
         printf("Position: %f %f %f \n", POS.x, POS.y, POS.z);
         printf("Velocity: %f %f %f \n \n", VEL.x, VEL.y, VEL.z);
 
     }
+    printf("--------------------------------------------------------------------\n");
     printf("Sonate: \n");
     propagator.setTle(sonate);
     for (int i = 0; i <= 1440 * 60; i += 360 * 60) {
         propagator.calculatePositionAndVelocity(i, POS, VEL);
+        printf("Time after Epoch %d \n", i / 60);
         printf("Position: %f %f %f \n", POS.x, POS.y, POS.z);
-        printf("Velocity: %f %f %f \n", VEL.x, VEL.y, VEL.z);
+        printf("Velocity: %f %f %f \n \n", VEL.x, VEL.y, VEL.z);
     }
+    printf("--------------------------------------------------------------------\n");
 
 
 }
