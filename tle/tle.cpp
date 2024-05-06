@@ -142,6 +142,7 @@ bool TLE::isLineValid(const char *line) const
 	//check if the TLE has exactly 69 characters
 	int32_t len = strlen(line);
 	if (len != 69) {
+        printf("wrong length \n");
 		return false;
 	}
 
@@ -170,6 +171,9 @@ bool TLE::isChecksumValid(const char *line) const
 
     //modulo 10 of checksum
 	cs %= 10;
+    if (!((line[68] - '0') == cs)){
+        printf("wrong checksum %d \n", cs);
+    }
 
 	return (line[68] - '0') == cs;
 }

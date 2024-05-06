@@ -14,7 +14,7 @@
 int main(int argc, char *argv[])
 {
 	// File with TLEs
-	string fileName = "tle.txt";
+	string fileName = "../tle.txt";
 
 	// Get Map from txt file
 	map<int, TLE> satMap = readTlesFromFile(fileName.c_str());
