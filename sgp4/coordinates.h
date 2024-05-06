@@ -3,18 +3,18 @@
 
 
 struct GeocentricCoordinate {
-	// TODO Ergänzen Sie Variablen und Funktionalitäten
+    double x,y,z;
 };
 
 struct GeodeticCoordinate {
-	// TODO Ergänzen Sie Variablen und Funktionalitäten
+    double x,y,z;
 };
 
 /**
  * @brief Simple 3D Cartesian coordinate in ECI
  */
 struct ECICoordinate {
-	// TODO Ergänzen Sie Variablen und Funktionalitäten
+    double x,y,z;
 };
 
 

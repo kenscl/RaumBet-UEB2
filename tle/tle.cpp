@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "tle.h"
-#include "..\helper\mathhelper.h"
+#include "../helper/mathhelper.h"
 #include <iostream>
 #include <iomanip>
 

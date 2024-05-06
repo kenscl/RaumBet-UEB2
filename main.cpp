@@ -9,7 +9,8 @@
 #include "sgp4/coordinates.h"
 #include "sgp4/SGP4Propagator.h"
 
-
+#ifndef __MAIN 
+#define __MAIN
 int main(int argc, char *argv[])
 {
 	// File with TLEs
@@ -25,3 +26,4 @@ int main(int argc, char *argv[])
 
 
 }
+#endif
