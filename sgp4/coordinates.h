@@ -1,13 +1,14 @@
 #ifndef COORDINATES_H_
 #define COORDINATES_H_
+#include "../math/matlib.h"
 
 
 struct GeocentricCoordinate {
-    double breite, länge;
+    double hight, latitude, longitude;
 };
 
 struct GeodeticCoordinate {
-    double breite, länge;
+    double hight, latitude, longitude;
 };
 
 /**
@@ -17,7 +18,12 @@ struct ECICoordinate {
     double x,y,z;
 };
 
+struct ECEFCoordinate {
+    double x,y,z;
+};
 
+
+Vector_3D convertECItoECEF(const ECICoordinate &eciCoord, double jd);
 /**
  * @brief Converts the ECI coordinate to the geodetic system
  */
