@@ -3,11 +3,11 @@
 
 
 struct GeocentricCoordinate {
-    double x,y,z;
+    double breite, länge;
 };
 
 struct GeodeticCoordinate {
-    double x,y,z;
+    double breite, länge;
 };
 
 /**
