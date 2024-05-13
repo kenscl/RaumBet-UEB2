@@ -3,6 +3,8 @@
 #include <string>
 #include <iomanip>
 #include <map>
+#include "sgp4/coordinates.h"
+#include "sgp4/timeDate.h"
 #include "tle/tle.h"
 #include "tle/tlereader.h"
 #include "sgp4/timeDate.h"
@@ -45,6 +47,16 @@ int main(int argc, char *argv[])
     }
     printf("--------------------------------------------------------------------\n");
 
+    ECICoordinate eci;
+    eci.x = 1000000;
+    eci.y = 1000000;
+    eci.z = 1000000;
+    GeocentricCoordinate gd = convertECItoGeocentric(eci, computeJD(24, 133.5));
+    Vector_3D ecef;
+    ecef = geozentricToECEF(gd);
+    convertECItoECEF(eci, computeJD(24,133.5)).print();
+    ecef.print();
+    printf ("gd %f %f %f \n", gd.latitude, gd.longitude, gd.hight);
 
 }
 #endif

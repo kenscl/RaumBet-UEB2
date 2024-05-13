@@ -34,4 +34,5 @@ GeodeticCoordinate convertECItoGeodetic(const ECICoordinate &eciCoord, double jd
  */
 GeocentricCoordinate convertECItoGeocentric(const ECICoordinate &eciCoord, double jd);
 
+Vector_3D geozentricToECEF (GeocentricCoordinate geo);
 #endif /* COORDINATES_H_ */

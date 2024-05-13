@@ -1,6 +1,7 @@
 #include "timeDate.h"
 #include <cmath>
 #include <cstdio>
+#include "../helper/mathhelper.h"
 
 /*
  * Implementation of the algorithm presented in https://de.wikipedia.org/wiki/Julianisches_Datum.
@@ -28,6 +29,7 @@ double computeJD(int year, double dayFraction) {
     }
 
     // Calculate day fraction as month of day and fractional day from the part of day fraction < 1 and day_of_year (now day of month)
+    day_of_year = day_of_year + days_in_month[month-1]; // 1 month more gets removed above than necesserry
     dayFraction = day_of_year + (dayFraction - (int)dayFraction);
 
     // Math for Julian Date calculation
@@ -58,12 +60,12 @@ double computeGMST(double jd) {
 
     w_e = 7.292115 * pow (10, -5);
     theta_g = theta_g_0 + w_e * T;
+    while (theta_g > TWO_PI) {
+        theta_g -= TWO_PI;
+    }
 
     return theta_g;
 
 }
 
-int main () {
-    printf("%f \n", computeGMST(2460443.001539));
-}
 
