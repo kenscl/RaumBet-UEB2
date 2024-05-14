@@ -1,3 +1,4 @@
 Fehler von Höhe und Länge:
 sind exakt gleich, dadurch ist der Fehler immer 0;
 Fehler des Breitengrads:
+Die geozentrischen Koordinaten unterscheiden sich von den geographischen nur im Breitengrad. Da für die geographischen Koordinaten die Erde als Ellipsoid modelliert wird, also als leicht abgeplattete Kugel, ändert sich die Umlaufbahn des Satelliten. Über den Polen ist die Ellipse flacher und über dem Equator weiter von der Erde entfernt. Dies führt zu 4 Schnittpunkten zwischen den beiden Bahnen, 2 über jedem Pol. Einer kurz vor und einer kurz nach jedem Pol. Das zeigt sich in der absoluten Fehlerbetrachtung in Form von 4 Punkten, die die 0 berühren und hinter jeweils einem Paar aus Schnittpunkten dadurch, dass der Fehler bis zu einem Maximum (Äquator) zu- und danach wieder abnimmt.
