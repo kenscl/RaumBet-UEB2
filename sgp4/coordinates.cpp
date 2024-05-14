@@ -1,39 +1,39 @@
 #include "coordinates.h"
+#include "timeDate.h"
 
 double forc_latitude(double lat) {
-    if (lat < -M_PI/2) {
-        return -M_PI/2;
-    } else if (lat > M_PI/2) {
-        return M_PI/2;
-    } else {
-        return lat;
-    }
+    while (lat <= -M_PI/2) {
+        lat += M_PI / 2; 
+    } while (lat >= M_PI/2) {
+        lat -= M_PI / 2; 
+    } 
+    return lat;
 }
 
 double forc_longitude(double lon) {
-    if (lon <= -M_PI) {
-        return M_PI;
-    } else if (lon > M_PI) {
-        return -M_PI;
-    } else {
-        return lon;
-    }
+    while (lon < -M_PI) {
+        lon += M_PI; 
+    } while (lon >= M_PI) {
+        lon -= M_PI; 
+    } 
+    return lon;
 }
 
 Vector_3D convertECItoECEF(const ECICoordinate &eciCoord, double jd){
     Matrix_3D rot;
     Vector_3D eci, ecef;
+    double sid = computeGMST(jd);
 
     eci.x = eciCoord.x;
     eci.y = eciCoord.y;
     eci.z = eciCoord.z;
     
-    rot.r[0][0] = cos (jd);
-    rot.r[0][1] = sin (jd);
+    rot.r[0][0] = cos (sid);
+    rot.r[0][1] = sin (sid);
     rot.r[0][2] = 0;
 
-    rot.r[1][0] = -sin (jd);
-    rot.r[1][1] = cos (jd);
+    rot.r[1][0] = -sin (sid);
+    rot.r[1][1] = cos (sid);
     rot.r[1][2] = 0;
 
     rot.r[2][0] = 0;
@@ -73,10 +73,13 @@ GeodeticCoordinate convertECItoGeodetic(const ECICoordinate &eciCoord, double jd
     GeocentricCoordinate geocentric;
     GeodeticCoordinate geodetic;
     geocentric = convertECItoGeocentric(eciCoord, jd);
-    geodetic.latitude = geocentric.latitude;
+    geodetic.longitude = geocentric.longitude ;
     geodetic.hight = geocentric.hight;
     geocentric = convertECItoGeocentric(eciCoord, jd);
-    geodetic.longitude= (1 - 1/298.257223563) * (1 - 1/298.257223563) * tan (geocentric.longitude);
+    geodetic.latitude = (1 - 1/298.257223563) * (1 - 1/298.257223563) * tan (geocentric.latitude);
+
+    geodetic.latitude = forc_latitude(geodetic.latitude);
+
 
     return geodetic;
 }

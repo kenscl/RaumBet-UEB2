@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     eci.x = 1000000;
     eci.y = 1000000;
     eci.z = 1000000;
+    printf ("std: %f \n", computeJD(24,133.5));
     GeocentricCoordinate gd = convertECItoGeocentric(eci, computeJD(24, 133.5));
     Vector_3D ecef;
     ecef = geozentricToECEF(gd);
