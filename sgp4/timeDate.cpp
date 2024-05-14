@@ -30,7 +30,6 @@ double computeJD(int year, double dayFraction) {
     // Calculate day fraction as month of day and fractional day from the part of day fraction < 1 and day_of_year (now day of month)
     //day_of_year = day_of_year + days_in_month[month-1]; // 1 month more gets removed above than necesserry
     day_of_year += dayFraction - floor(dayFraction);
-    printf("year: %d, month: %d, day: %f\n", year, month, day_of_year);
     month++;
     // Math for Julian Date calculation
     if (month <= 2) {
@@ -62,6 +61,9 @@ double computeGMST(double jd) {
     theta_g = theta_g_0 + w_e * T;
     while (theta_g > TWO_PI) {
         theta_g -= TWO_PI;
+    }
+    while (theta_g <= 0) {
+        theta_g += TWO_PI;
     }
 
     return theta_g;

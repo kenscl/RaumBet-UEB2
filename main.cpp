@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <map>
+#include "helper/mathhelper.h"
 #include "sgp4/coordinates.h"
 #include "sgp4/timeDate.h"
 #include "tle/tle.h"
@@ -58,7 +59,21 @@ int main(int argc, char *argv[])
     convertECItoECEF(eci, computeJD(24,1.5)).print();
     ecef.print();
     printf ("gd %f %f %f \n", gd.latitude, gd.longitude, gd.hight);*/
-	printf("%f", computeJD(24,133.5));
+    //propagator.setTle(sonate); for (int i = 0; i < 100 * 60; i++){ propagator.calculatePositionAndVelocity(i, POS, VEL);
+    //    double epoch = computeJD(24, sonate.getDayFraction() + (double) i / (24 * 60 * 60));
+    //    GeocentricCoordinate gc = convertECItoGeocentric(POS, epoch);
+    //    GeodeticCoordinate gd = convertECItoGeodetic(POS, epoch);
+    //    printf("%d, %f, %f, %f \n",i, rad2deg(gc.latitude - gd.latitude) , rad2deg(gc.longitude - gd.longitude), gc.hight - gd.hight);
+    //}
+    //
 
+    propagator.setTle(sonate);
+    printf("mm %f \n", sonate.getMeanMotion());
+    for (int i = 0; i < 3 * 60 * (TWO_PI / sonate.getMeanMotion()); i++) {
+        propagator.calculatePositionAndVelocity(i, POS, VEL);
+        double epoch = computeJD(24, sonate.getDayFraction() + (double) i / (24 * 60 * 60));
+        GeodeticCoordinate gd = convertECItoGeodetic(POS, epoch);
+        printf("%f %f \n", rad2deg(gd.longitude), rad2deg(gd.latitude));
+    }
 }
 #endif
