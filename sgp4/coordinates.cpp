@@ -59,8 +59,8 @@ GeocentricCoordinate convertECItoGeocentric(const ECICoordinate &eciCoord, doubl
 
     GeocentricCoordinate result;
     result.hight = sqrt (ecef.x * ecef.x + ecef.y * ecef.y + ecef.z * ecef.z);
-    result.longitude= atan2 (ecef.z, sqrt (ecef.x * ecef.x + ecef.y * ecef.y));
-    result.latitude = atan2 (ecef.y, ecef.x);
+    result.latitude = atan2 (ecef.z, sqrt (ecef.x * ecef.x + ecef.y * ecef.y));
+    result.longitude = atan2 (ecef.y,ecef.x);
     
     result.latitude = forc_latitude(result.latitude);
     result.longitude = forc_longitude(result.longitude);
@@ -76,7 +76,7 @@ GeodeticCoordinate convertECItoGeodetic(const ECICoordinate &eciCoord, double jd
     geodetic.longitude = geocentric.longitude ;
     geodetic.hight = geocentric.hight;
     geocentric = convertECItoGeocentric(eciCoord, jd);
-    geodetic.latitude = (1 - 1/298.257223563) * (1 - 1/298.257223563) * tan (geocentric.latitude);
+    geodetic.latitude = atan ((1 - 1/298.257223563) * (1 - 1/298.257223563) * tan (geocentric.latitude));
 
     geodetic.latitude = forc_latitude(geodetic.latitude);
 
