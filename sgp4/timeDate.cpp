@@ -7,23 +7,15 @@
  * Implementation of the algorithm presented in https://de.wikipedia.org/wiki/Julianisches_Datum.
  */
 double computeJD(int year, double dayFraction) {
-    double B, JD, day_of_year;
-    int month = 0;
-
-    // Convert year if needed
-    if (year < 57) {
-        year += 2000;
-    } else if (year <= 99){
-        year += 1900;
-    }
+    double B, JD = 0;
+    int month = 1;
 
     // Array to store days in each month, considering leap years
     int days_in_month[] = {31, 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     // Calculate the month from the day of the year
-    day_of_year = floor(dayFraction);
-    while (day_of_year > days_in_month[month]) {
-        day_of_year -= days_in_month[month];
+    while (dayFraction > days_in_month[month-1]) {
+        dayFraction -= days_in_month[month-1];
         month++;
     }
 
@@ -31,13 +23,14 @@ double computeJD(int year, double dayFraction) {
     //day_of_year = day_of_year + days_in_month[month-1]; // 1 month more gets removed above than necesserry
     day_of_year += dayFraction - floor(dayFraction);
     month++;
+
     // Math for Julian Date calculation
     if (month <= 2) {
         year = year - 1;
         month = month + 12;
     }
     B = 2 - floor( (double) year/100) + floor( (double) year / 400);
-    JD = floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + day_of_year + B - 1524.5;
+    JD = floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + dayFraction + B - 1524.5;
     return JD;
 }
 
