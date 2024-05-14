@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     ECICoordinate VEL;
     SGP4Propagator propagator;
     
-    printf("Test Case: \n");
+    /*printf("Test Case: \n");
     propagator.setTle(test_case_tle);
     for (int i = 0; i <= 1440 * 60; i += 360 * 60) {
         propagator.calculatePositionAndVelocity(i, POS, VEL);
@@ -46,17 +46,18 @@ int main(int argc, char *argv[])
         printf("Velocity: %f %f %f \n \n", VEL.x, VEL.y, VEL.z);
     }
     printf("--------------------------------------------------------------------\n");
-
-    ECICoordinate eci;
+	*/
+    /*ECICoordinate eci;
     eci.x = 1000000;
     eci.y = 1000000;
     eci.z = 1000000;
     GeocentricCoordinate gd = convertECItoGeocentric(eci, computeJD(24, 133.5));
     Vector_3D ecef;
     ecef = geozentricToECEF(gd);
-    convertECItoECEF(eci, computeJD(24,133.5)).print();
+    convertECItoECEF(eci, computeJD(24,1.5)).print();
     ecef.print();
-    printf ("gd %f %f %f \n", gd.latitude, gd.longitude, gd.hight);
+    printf ("gd %f %f %f \n", gd.latitude, gd.longitude, gd.hight);*/
+	printf("%f", computeJD(24,133.5));
 
 }
 #endif

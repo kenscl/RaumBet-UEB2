@@ -7,8 +7,8 @@
  * Implementation of the algorithm presented in https://de.wikipedia.org/wiki/Julianisches_Datum.
  */
 double computeJD(int year, double dayFraction) {
-    double A, B, JD;
-    int day_of_year, month;
+    double B, JD, day_of_year;
+    int month = 0;
 
     // Convert year if needed
     if (year < 57) {
@@ -21,24 +21,24 @@ double computeJD(int year, double dayFraction) {
     int days_in_month[] = {31, 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     // Calculate the month from the day of the year
-    day_of_year = (int)dayFraction;
-    month = 0;
+    day_of_year = floor(dayFraction);
     while (day_of_year > days_in_month[month]) {
         day_of_year -= days_in_month[month];
         month++;
     }
 
     // Calculate day fraction as month of day and fractional day from the part of day fraction < 1 and day_of_year (now day of month)
-    day_of_year = day_of_year + days_in_month[month-1]; // 1 month more gets removed above than necesserry
-    dayFraction = day_of_year + (dayFraction - (int)dayFraction);
-
+    //day_of_year = day_of_year + days_in_month[month-1]; // 1 month more gets removed above than necesserry
+    day_of_year += dayFraction - floor(dayFraction);
+    printf("year: %d, month: %d, day: %f\n", year, month, day_of_year);
+    month++;
     // Math for Julian Date calculation
-    if (month < 2) {
+    if (month <= 2) {
         year = year - 1;
         month = month + 12;
     }
     B = 2 - floor( (double) year/100) + floor( (double) year / 400);
-    JD = floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + dayFraction + B - 1524.5;
+    JD = floor(365.25 * (year + 4716)) + floor(30.6001 * (month + 1)) + day_of_year + B - 1524.5;
     return JD;
 }
 
